@@ -6,38 +6,40 @@ Este proyecto sigue una arquitectura basada en **MVVM** con un enfoque **modular
 
 ## 📁 Estructura del Proyecto
 
+```plaintext
 com.tuapp
 │
-├── data # Acceso a datos: red, repositorio y sesión
-│ ├── remote
-│ │ ├── api # Interfaces de servicios (Retrofit)
-│ │ │ └── TokenService.kt
-│ │ ├── dto # Modelos para la comunicación con la API
-│ │ │ ├── LoginRequest.kt
-│ │ │ └── LoginResponse.kt
-│ │ └── retrofit # Configuración del cliente Retrofit
-│ │ └── RetrofitClient.kt
-│ ├── repository # Implementación de repositorios
-│ │ └── UserRepository.kt
-│ └── session # Gestión de sesión del usuario
-│ ├── SessionManager.kt
-│ └── UserSessionModels.kt
+├── data                 # Acceso a datos: red, repositorio y sesión
+│   ├── remote
+│   │   ├── api          # Interfaces de servicios (Retrofit)
+│   │   │   └── TokenService.kt
+│   │   ├── dto          # Modelos para la comunicación con la API
+│   │   │   ├── LoginRequest.kt
+│   │   │   └── LoginResponse.kt
+│   │   └── retrofit     # Configuración del cliente Retrofit
+│   │       └── RetrofitClient.kt
+│   ├── repository       # Implementación de repositorios
+│   │   └── UserRepository.kt
+│   └── session          # Gestión de sesión del usuario
+│       ├── SessionManager.kt
+│       └── UserSessionModels.kt
 │
-├── domain # Lógica de negocio y modelos puros
-│ ├── model # Modelos independientes del backend
-│ │ └── User.kt
-│ └── usecase # (Opcional) Casos de uso de la aplicación
+├── domain               # Lógica de negocio y modelos puros
+│   ├── model            # Modelos independientes del backend
+│   │   └── User.kt
+│   └── usecase          # (Opcional) Casos de uso de la aplicación
 │
-├── presentation # Lógica de presentación (UI + ViewModels)
-│ ├── login # Feature: login
-│ │ ├── LoginFragment.kt
-│ │ └── LoginViewModel.kt
-│ └── MainActivity.kt
+├── presentation         # Lógica de presentación (UI + ViewModels)
+│   ├── login            # Feature: login
+│   │   ├── LoginFragment.kt
+│   │   └── LoginViewModel.kt
+│   └── MainActivity.kt
 │
-├── utils # Utilidades y constantes globales
-│ └── constants
-│ ├── GeneralPaths.kt
-│ └── Token.kt
+├── utils                # Utilidades y constantes globales
+│   └── constants
+│       ├── GeneralPaths.kt
+│       └── Token.kt
+````
 
 
 ---
