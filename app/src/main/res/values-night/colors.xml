@@ -1,0 +1,13 @@
+<resources>
+    <!-- Colores principales en modo oscuro -->
+    <color name="blue_dark">#90CAF9</color>        <!-- Azul claro suave -->
+    <color name="blue_darker">#64B5F6</color>      <!-- Azul un poco más intenso -->
+
+    <!-- Grises adaptados al fondo oscuro -->
+    <color name="gray_medium">#B0BEC5</color>      <!-- Gris claro, legible -->
+    <color name="gray_dark">#90A4AE</color>        <!-- Gris medio para contraste -->
+
+    <!-- Texto sobre fondo oscuro -->
+    <color name="white">#2C2C2C</color>            <!-- Mantenemos blanco para texto -->
+</resources>
+
