@@ -1,8 +1,7 @@
-package com.example.login.constants.paths
+package com.example.login.data.session
 
 import android.content.Context
 import com.google.gson.Gson
-import com.example.login.constants.model.*
 import com.google.gson.reflect.TypeToken
 
 class SessionManager(context: Context){

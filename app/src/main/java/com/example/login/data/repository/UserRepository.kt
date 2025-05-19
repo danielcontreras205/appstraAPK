@@ -1,8 +1,8 @@
-package com.example.login.data
+package com.example.login.data.repository
 
-import com.example.login.dto.loginDtos.LoginRequest
-import com.example.login.dto.loginDtos.LoginResponse
-import com.example.login.retrofit.login.RetrofitClient
+import com.example.login.data.remote.api.dto.loginDtos.LoginRequest
+import com.example.login.data.remote.api.dto.loginDtos.LoginResponse
+import com.example.login.data.remote.retrofit.login.RetrofitClient
 
 class UserRepository {
 

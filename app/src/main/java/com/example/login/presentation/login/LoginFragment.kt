@@ -1,4 +1,4 @@
-package com.example.login.ui.LoginFragment
+package com.example.login.presentation.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.login.R
-import com.example.login.constants.paths.GeneralPaths
-import com.example.login.constants.paths.SessionManager
+import com.example.login.utils.constants.GeneralPaths
+import com.example.login.data.session.SessionManager
 import com.example.login.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {

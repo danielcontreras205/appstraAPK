@@ -1,4 +1,4 @@
-package com.example.login.constants.model
+package com.example.login.data.session
 
 data class User(
     val userId: Int,

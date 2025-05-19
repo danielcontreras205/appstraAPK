@@ -1,11 +1,11 @@
-package com.example.login.ui.LoginFragment
+package com.example.login.presentation.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.login.data.UserRepository
-import com.example.login.dto.loginDtos.LoginResponse
+import com.example.login.data.repository.UserRepository
+import com.example.login.data.remote.api.dto.loginDtos.LoginResponse
 import kotlinx.coroutines.launch
 
 

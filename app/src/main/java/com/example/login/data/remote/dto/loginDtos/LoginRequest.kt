@@ -1,4 +1,4 @@
-package com.example.login.dto.loginDtos
+package com.example.login.data.remote.api.dto.loginDtos
 
 
 data class LoginRequest(

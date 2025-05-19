@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.login.ui.LoginFragment.LoginFragment"
+        android:name="com.example.login.presentation.login.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.login.ui.home.HomeFragment"
+        android:name="com.example.login.presentation.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home"/>
 </navigation>
