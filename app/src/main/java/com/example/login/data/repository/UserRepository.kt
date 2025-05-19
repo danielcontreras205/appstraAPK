@@ -8,7 +8,7 @@ class UserRepository {
 
     suspend fun authenticate(username: String, password: String): Result<LoginResponse> {
         return try {
-            val response = RetrofitClient.api.login(LoginRequest(username, password))
+            val response = RetrofitClient.getApi().login(LoginRequest(username, password))
             if (response.isSuccessful) {
                 response.body()?.let {
                     Result.success(it)

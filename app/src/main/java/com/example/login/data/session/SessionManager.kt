@@ -25,6 +25,11 @@ class SessionManager(context: Context){
         editor.apply()
     }
 
+    fun getAmbiente(): String? {
+        return sharedPreferences.getString(KEY_AMBIENTE, null)
+    }
+
+
     fun saveSession(token: String, user: User, companyList: List<Company>, message: String) {
         editor.putString(KEY_TOKEN, token)
         editor.putString(KEY_USER, gson.toJson(user))
