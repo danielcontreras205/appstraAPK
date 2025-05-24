@@ -24,10 +24,15 @@ com.tuapp
 │       ├── SessionManager.kt
 │       └── UserSessionModels.kt
 │
-├── domain               # Lógica de negocio y modelos puros
-│   ├── model            # Modelos independientes del backend
+├── domain						# Lógica de negocio, mapeo y modelos puros
+│   ├── mapper					# Modelos mapeados
+│   │   └── loginMapper.kt
+│   ├── model					# Modelos independientes del backend
 │   │   └── User.kt
-│   └── usecase          # (Opcional) Casos de uso de la aplicación
+│   ├── response				# modelos respuesta HTTP
+│   │   └── TokenResponse					
+│   └── usecase					# logica de negocio
+│       └──UserCaseToken
 │
 ├── presentation         # Lógica de presentación (UI + ViewModels)
 │   ├── login            # Feature: login
