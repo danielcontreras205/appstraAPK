@@ -9,41 +9,42 @@ Este proyecto sigue una arquitectura basada en **MVVM** con un enfoque **modular
 ```plaintext
 com.tuapp
 │
-├── data                 # Acceso a datos: red, repositorio y sesión
-│   ├── remote
-│   │   ├── api          # Interfaces de servicios (Retrofit)
+├── 📦 data                      # Acceso a datos: red, repositorio y sesión
+│   ├── 🌐 remote                # Comunicación con servicios externos
+│   │   ├── 🔌 api              # Interfaces de servicios (Retrofit)
 │   │   │   └── TokenService.kt
-│   │   ├── dto          # Modelos para la comunicación con la API
+│   │   ├── 📄 dto              # Modelos para la comunicación con la API
 │   │   │   ├── LoginRequest.kt
 │   │   │   └── LoginResponse.kt
-│   │   └── retrofit     # Configuración del cliente Retrofit
+│   │   └── ⚙️ retrofit         # Configuración del cliente Retrofit
 │   │       └── RetrofitClient.kt
-│   ├── repository       # Implementación de repositorios
+│   ├── 🗃️ repository            # Implementación de repositorios
 │   │   └── UserRepository.kt
-│   └── session          # Gestión de sesión del usuario
+│   └── 🔐 session              # Gestión de sesión del usuario
 │       ├── SessionManager.kt
 │       └── UserSessionModels.kt
 │
-├── domain						# Lógica de negocio, mapeo y modelos puros
-│   ├── mapper					# Modelos mapeados
+├── 🧠 domain                   # Lógica de negocio, mapeo y modelos puros
+│   ├── 🔄 mapper              # Mapeo entre modelos
 │   │   └── loginMapper.kt
-│   ├── model					# Modelos independientes del backend
+│   ├── 🧍 model               # Modelos independientes del backend
 │   │   └── User.kt
-│   ├── response				# modelos respuesta HTTP
-│   │   └── TokenResponse					
-│   └── usecase					# logica de negocio
-│       └──UserCaseToken
+│   ├── 📥 response            # Modelos de respuesta HTTP
+│   │   └── TokenResponse
+│   └── 🧩 usecase             # Casos de uso (lógica de negocio)
+│       └── UserCaseToken
 │
-├── presentation         # Lógica de presentación (UI + ViewModels)
-│   ├── login            # Feature: login
+├── 🖥️ presentation            # Capa de presentación (UI + ViewModels)
+│   ├── 🔐 login               # Funcionalidad de inicio de sesión
 │   │   ├── LoginFragment.kt
 │   │   └── LoginViewModel.kt
 │   └── MainActivity.kt
 │
-├── utils                # Utilidades y constantes globales
+├── 🧰 utils                    # Utilidades y constantes globales
 │   └── constants
 │       ├── GeneralPaths.kt
 │       └── Token.kt
+
 ````
 
 
