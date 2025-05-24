@@ -14,22 +14,23 @@ class LoginViewModel() : ViewModel() {
 
     private val userRepository = UserRepository()
     private val userCaseToken = UserCaseToken(userRepository)
-    private val _loginSuccess = MutableLiveData<Boolean>()
 
+    private val _loginSuccess = MutableLiveData<Boolean>()
     val loginSuccess: LiveData<Boolean> = _loginSuccess
 
-    private val _user = MutableLiveData<TokenResponse?>()
-    val user: LiveData<TokenResponse?> = _user
+    private val _tokenResponse = MutableLiveData<TokenResponse?>()
+    val tokenResponse: LiveData<TokenResponse?> = _tokenResponse
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
             val result = userCaseToken.execute(username, password)
             if (result.isSuccess) {
                 val loginResponse = result.getOrNull()
-                _user.value = loginResponse
+                _tokenResponse.value = loginResponse
                 _loginSuccess.value = true
             } else {
                 _loginSuccess.value = false
+                _tokenResponse.value = null
             }
         }
     }

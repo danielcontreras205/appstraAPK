@@ -7,15 +7,64 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="307dp"
-        android:layout_height="561dp"
-        android:gravity="center"
+        android:id="@+id/textViewBienvenido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/txt_bienvenido"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewToken"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/textViewToken"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/TXTtoken"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBienvenido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/textViewUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/TXTusuario"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewToken"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/TXTmensaje"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewUser"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewCompanies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/TXTempresas"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewMessage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

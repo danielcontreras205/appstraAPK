@@ -55,6 +55,11 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, "Login fallido", Toast.LENGTH_SHORT).show()
             }
         }
+        viewModel.tokenResponse.observe(viewLifecycleOwner){ response ->
+            response?.let {
+                sessionManager.saveSession(it.token,it.user,it.listCompany,it.messageDTO)
+            }
+        }
     }
 
     override fun onDestroyView() {

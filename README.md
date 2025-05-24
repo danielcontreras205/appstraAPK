@@ -22,7 +22,6 @@ com.tuapp
 │   │   └── UserRepository.kt
 │   └── 🔐 session              # Gestión de sesión del usuario
 │       ├── SessionManager.kt
-│       └── UserSessionModels.kt
 │
 ├── 🧠 domain                   # Lógica de negocio, mapeo y modelos puros
 │   ├── 🔄 mapper              # Mapeo entre modelos
