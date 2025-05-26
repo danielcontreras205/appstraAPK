@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.login.R
 import com.example.login.data.session.SessionManager
 import com.example.login.databinding.FragmentHomeBinding
+import com.example.login.databinding.ModalCerrarSesionBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HomeFragment : Fragment() {
 
@@ -46,11 +48,28 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnCerrarSesion.setOnClickListener {
-            sessionManager.clearSession()
-            findNavController().navigate(R.id.action_homeFragment_to_LoginFragment)
-            Toast.makeText(requireContext(), "Sesion Cerrada", Toast.LENGTH_SHORT).show()
-        }
+            /*
+            Recomendación:
+            Usa AlertDialog para mensajes y confirmaciones simples.
+            Usa DialogFragment para layouts personalizados reutilizables.
+            Usa BottomSheetDialog para una experiencia de usuario más moderna tipo "modal deslizable".
+            */
+            val bottomSheetDialog = BottomSheetDialog(requireContext())
+            val modalBinding = ModalCerrarSesionBinding.inflate(layoutInflater)
 
+            modalBinding.btnConfirmarCerrar.setOnClickListener {
+                sessionManager.clearSession()
+                bottomSheetDialog.dismiss()
+                findNavController().navigate(R.id.action_homeFragment_to_LoginFragment)
+                Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
+            }
+
+            modalBinding.btnCancelar.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+            bottomSheetDialog.setContentView(modalBinding.root)
+            bottomSheetDialog.show()
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()
