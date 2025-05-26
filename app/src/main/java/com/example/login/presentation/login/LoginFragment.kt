@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.login.MainActivity
 import com.example.login.R
 import com.example.login.data.remote.retrofit.login.RetrofitClient
 import com.example.login.utils.constants.GeneralPaths
@@ -53,6 +54,8 @@ class LoginFragment : Fragment() {
         viewModel.tokenResponse.observe(viewLifecycleOwner){ response ->
             response?.let {
                 sessionManager.saveSession(it.token,it.user,it.listCompany,it.messageDTO)
+                //carga el menu
+                (activity as? MainActivity)?.actualizarMenu()
             }
         }
     }

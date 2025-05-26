@@ -12,4 +12,6 @@
     <string name="TXTEstado" >Estado:</string>
     <string name="TXTTipoEstado">Tipo estado:</string>
     <string name="ButtonSalir">Salir</string>
+
+    <string name="action_opciones">opciones</string>
 </resources>
