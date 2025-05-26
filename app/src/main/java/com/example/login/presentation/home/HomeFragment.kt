@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.login.R
 import com.example.login.data.session.SessionManager
@@ -60,7 +61,10 @@ class HomeFragment : Fragment() {
             modalBinding.btnConfirmarCerrar.setOnClickListener {
                 sessionManager.clearSession()
                 bottomSheetDialog.dismiss()
-                findNavController().navigate(R.id.action_homeFragment_to_LoginFragment)
+                findNavController().navigate(R.id.action_homeFragment_to_LoginFragment,
+                    null,
+                    NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build())
+
                 Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
             }
 
