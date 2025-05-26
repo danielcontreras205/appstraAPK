@@ -9,5 +9,6 @@
 
     <!-- Texto sobre fondo oscuro -->
     <color name="white">#2C2C2C</color>            <!-- Mantenemos blanco para texto -->
+    <color name="black">#FFFFFF</color>
 </resources>
 

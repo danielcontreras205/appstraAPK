@@ -18,7 +18,6 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
@@ -48,13 +47,9 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.loginSuccess.observe(viewLifecycleOwner) { success ->
-
-            if (success) {
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            } else {
-                Toast.makeText(context, "Login fallido", Toast.LENGTH_SHORT).show()
-            }
+            handleLoginResult(success, sessionManager)
         }
+        // carga datos a sesion
         viewModel.tokenResponse.observe(viewLifecycleOwner){ response ->
             response?.let {
                 sessionManager.saveSession(it.token,it.user,it.listCompany,it.messageDTO)
@@ -66,6 +61,16 @@ class LoginFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    // valida el logueo si fue exitoso
+    private fun handleLoginResult(success: Boolean, sessionManager: SessionManager) {
+        if (success) {
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            Toast.makeText(requireContext(), sessionManager.getMessage(), Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Login fallido", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
 
 

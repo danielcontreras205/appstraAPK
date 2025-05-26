@@ -20,4 +20,8 @@
         android:name="com.example.login.presentation.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home"/>
+        <action
+            android:id="@+id/action_homeFragment_to_LoginFragment"
+            app:destination="@id/loginFragment" />
+
 </navigation>

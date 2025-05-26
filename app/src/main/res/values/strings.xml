@@ -9,6 +9,7 @@
     <string name="TXTusuario">Usuario:</string>
     <string name="TXTmensaje">Mensaje:</string>
     <string name="TXTempresas">Empresas:</string>
-
-
+    <string name="TXTEstado" >Estado:</string>
+    <string name="TXTTipoEstado">Tipo estado:</string>
+    <string name="ButtonSalir">Salir</string>
 </resources>
