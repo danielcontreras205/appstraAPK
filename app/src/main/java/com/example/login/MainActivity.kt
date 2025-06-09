@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import com.example.login.data.session.SessionManager
+import com.example.login.presentation.home.MenuActionHandler
 
 class MainActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
@@ -50,12 +51,24 @@ class MainActivity : AppCompatActivity() {
     fun actualizarMenu() {
         invalidateOptionsMenu()
     }
-    // cerrar sesion desde el menu
+    // opciones menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
                 Toast.makeText(this, "Hola Mundo", Toast.LENGTH_SHORT).show()
                 true
+            }
+            R.id.action_cerrar_sesion -> {
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.nav_host_fragment) // tu NavHostFragment
+                val currentFragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+
+                if (currentFragment is MenuActionHandler) {
+                    currentFragment.onCerrarSesionDesdeMenu()
+                    true
+                } else {
+                    false
+                }
             }
             else -> super.onOptionsItemSelected(item)
         }

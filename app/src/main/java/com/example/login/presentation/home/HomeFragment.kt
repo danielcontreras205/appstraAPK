@@ -15,12 +15,17 @@ import com.example.login.databinding.FragmentHomeBinding
 import com.example.login.databinding.ModalCerrarSesionBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),MenuActionHandler  {
 
     private var _binding: FragmentHomeBinding ? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: HomeViewModel
+
+    //menu por interface
+    override fun onCerrarSesionDesdeMenu() {
+        mostrarModalCerrarSesion()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
