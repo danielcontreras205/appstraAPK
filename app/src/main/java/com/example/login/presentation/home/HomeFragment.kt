@@ -55,7 +55,7 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         }
 
         binding.btnCerrarSesion.setOnClickListener {
-            mostrarModalCerrarSesion()
+            //mostrarModalCerrarSesion()
         }
     }
     // funciones -----------------------------------------------------------------------------------
