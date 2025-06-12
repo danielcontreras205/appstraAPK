@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.login.MainActivity
@@ -14,13 +17,13 @@ import com.example.login.R
 import com.example.login.data.session.SessionManager
 import com.example.login.databinding.FragmentHomeBinding
 import com.example.login.databinding.ModalCerrarSesionBinding
+import com.example.login.presentation.login.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class HomeFragment : Fragment(),MenuActionHandler  {
 
     private var _binding: FragmentHomeBinding ? = null
     private val binding get() = _binding!!
-
     private lateinit var viewModel: HomeViewModel
 
     //menu por interface
@@ -39,6 +42,7 @@ class HomeFragment : Fragment(),MenuActionHandler  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         val sessionManager = SessionManager(requireContext())
         val token = sessionManager.getToken()
@@ -54,6 +58,8 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         } else {
             "No hay empresas"
         }
+        // carga informacion del usuario
+        user?.let {getPersona(user.userId,"Bearer " + token.toString())}
         // Configurar botones de UI
         configurarEventosUI()
         // Configurar gestos del sistema
@@ -102,7 +108,19 @@ class HomeFragment : Fragment(),MenuActionHandler  {
             mostrarModalCerrarSesion()
         }
     }
+    private fun getPersona(userId: Int,token: String) {
+        viewModel.getPerson(userId,token)
+        viewModel.personResponse.observe(viewLifecycleOwner){ response ->
+            response?.let {
+                // Obtiene la vista del header del NavigationView
+                val headerView = binding.navigationView.getHeaderView(0)
+                val nameTextView = headerView.findViewById<TextView>(R.id.textView) // Subtitulo
+                val titleTextView = headerView.findViewById<TextView>(R.id.textViewTitle) // Título
 
-
-
+                // Asigna los valores recibidos al TextView
+                titleTextView.text = it.personFirstName // Ajusta al nombre real del campo
+                nameTextView.text = it.personEmail // Ajusta al nombre real del campo
+            }
+        }
+    }
 }

@@ -101,6 +101,17 @@
         app:iconGravity="textStart"
         app:iconPadding="8dp"
         app:layout_constraintEnd_toEndOf="@+id/cardContainer"
-        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Menú lateral -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/bar_menu_left"
+        app:headerLayout="@layout/nav_header"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
