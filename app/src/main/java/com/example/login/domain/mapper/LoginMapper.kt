@@ -4,10 +4,23 @@ import com.example.login.data.remote.api.dto.loginDtos.LoginResponse
 import com.example.login.data.remote.api.dto.loginDtos.State
 import com.example.login.data.remote.api.dto.loginDtos.StateType
 import com.example.login.data.remote.api.dto.loginDtos.User
+import com.example.login.data.remote.dto.UsuarioDTO.City
+import com.example.login.data.remote.dto.UsuarioDTO.Country
+import com.example.login.data.remote.dto.UsuarioDTO.Department
+import com.example.login.data.remote.dto.UsuarioDTO.DocumentType
+import com.example.login.data.remote.dto.UsuarioDTO.PersonResponse
+import com.example.login.data.remote.dto.UsuarioDTO.Province
+import com.example.login.domain.model.user.ModelCity
 import com.example.login.domain.model.user.ModelCompany
+import com.example.login.domain.model.user.ModelCountry
+import com.example.login.domain.model.user.ModelDepartment
+import com.example.login.domain.model.user.ModelDocumentType
+import com.example.login.domain.model.user.ModelPerson
+import com.example.login.domain.model.user.ModelProvince
 import com.example.login.domain.model.user.ModelUser
 import com.example.login.domain.model.user.ModelState
 import com.example.login.domain.model.user.ModelStateType
+import com.example.login.domain.response.PersonaResponse
 import com.example.login.domain.response.TokenResponse
 
 
@@ -24,6 +37,74 @@ fun LoginResponse.toDomainTokenResponse(): TokenResponse {
                 personId = it.personId
             )
         }
+    )
+}
+
+fun PersonResponse.toDomainPersonaResponse(): PersonaResponse {
+    return PersonaResponse(
+        personId = this.personId,
+        personFirstName = this.personFirstName,
+        personLastName = this.personLastName,
+        personEmail = this.personEmail,
+        personMobilePhone = this.personMobilePhone,
+        personLandlinePhone = this.personLandlinePhone,
+        personAddress = this.personAddress,
+        city = this.city.toDomainCity(),
+        personRH = this.personRH,
+        personBloodType = this.personBloodType,
+        personCreationDate = this.personCreationDate,
+        personBirthdayDate = this.personBirthdayDate,
+        personChildren = this.personChildren,
+        personNumberIdentification = this.personNumberIdentification,
+        personDateIssueIdentification = this.personDateIssueIdentification,
+        personEditDate = this.personEditDate,
+        personEditUserID = this.personEditUserID,
+        user = this.user.toDomainUser(),
+        documentType = this.documentType.toDomainDocumentType()
+    )
+}
+
+fun City.toDomainCity(): ModelCity {
+    return ModelCity(
+        cityId = this.cityId,
+        cityName = this.cityName,
+        cityCode = this.cityCode,
+        cityCreationDate = this.cityCreationDate,
+        cityEditDate = this.cityEditDate,
+        cityEditUserID = this.cityEditUserID,
+        province = province.toDomainProvince()
+    )
+}
+
+
+fun Province.toDomainProvince(): ModelProvince {
+    return ModelProvince(
+        provinceId = this.provinceId,
+        provinceName = this.provinceName,
+        provinceCreationDate = this.provinceCreationDate,
+        provinceEditDate = this.provinceEditDate,
+        provinceEditUserID = this.provinceEditUserID,
+        department = this.department.toDomainDepartment()
+    )
+}
+
+fun Department.toDomainDepartment(): ModelDepartment {
+    return ModelDepartment(
+        departmentId = this.departmentId,
+        departmentName = this.departmentName,
+        departmentCreationDate =this.departmentCreationDate,
+        departmentEditDate =this.departmentEditDate,
+        departmentEditUserID =this.departmentEditUserID,
+        country = this.country.toDomainCountry()
+    )
+}
+
+fun Country.toDomainCountry(): ModelCountry {
+    return ModelCountry(
+        countryId = this.countryId,
+        countryName = this.countryName,
+        countryCreationDate = this.countryEditDate,
+        countryEditDate = this.countryEditDate,
     )
 }
 
@@ -57,5 +138,16 @@ fun StateType.toDomainStateType(): ModelStateType {
         stateTypeCreationDate = this.stateTypeCreationDate,
         stateTypeEditDate = this.stateTypeEditDate,
         stateTypeEditUserID = this.stateTypeEditUserID
+    )
+}
+fun DocumentType.toDomainDocumentType(): ModelDocumentType {
+    return ModelDocumentType(
+        documentTypeId = this.documentTypeId,
+        documentTypeName = this.documentTypeName,
+        documentTypeInitial = this.documentTypeInitial,
+        documentDescription = this.documentDescription,
+        documentTypeCreationDate = this.documentTypeCreationDate,
+        documentTypeEditDate = this.documentTypeEditDate,
+        documentTypeEditUserID = this.documentTypeEditUserID
     )
 }

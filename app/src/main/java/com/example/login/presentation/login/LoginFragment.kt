@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.login.MainActivity
 import com.example.login.R
-import com.example.login.data.remote.retrofit.login.RetrofitClient
+import com.example.login.data.remote.retrofit.login.RetrofitUsuario
 import com.example.login.utils.constants.GeneralPaths
 import com.example.login.data.session.SessionManager
 import com.example.login.databinding.FragmentLoginBinding
@@ -36,7 +36,7 @@ class LoginFragment : Fragment() {
         // Se coloca el ambiente en el cual va a trabajar
         val sessionManager = SessionManager(requireContext())
         sessionManager.setAmbiente(GeneralPaths.PRODUCCION)
-        sessionManager.getAmbiente()?.let { RetrofitClient.init(it) }
+        sessionManager.getAmbiente()?.let { RetrofitUsuario.init(it) }
 
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
