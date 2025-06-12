@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -53,10 +54,10 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         } else {
             "No hay empresas"
         }
-
-        binding.btnCerrarSesion.setOnClickListener {
-            //mostrarModalCerrarSesion()
-        }
+        // Configurar botones de UI
+        configurarEventosUI()
+        // Configurar gestos del sistema
+        configurarGestosSistema()
     }
     // funciones -----------------------------------------------------------------------------------
     override fun onDestroyView() {
@@ -91,5 +92,17 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         bottomSheetDialog.setContentView(modalBinding.root)
         bottomSheetDialog.show()
     }
+    private fun configurarEventosUI() {
+        binding.btnCerrarSesion.setOnClickListener {
+            mostrarModalCerrarSesion()
+        }
+    }
+    private fun configurarGestosSistema() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            mostrarModalCerrarSesion()
+        }
+    }
+
+
 
 }
