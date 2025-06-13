@@ -19,6 +19,7 @@ import com.example.login.databinding.FragmentHomeBinding
 import com.example.login.databinding.ModalCerrarSesionBinding
 import com.example.login.presentation.login.LoginViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.navigation.NavigationView
 
 class HomeFragment : Fragment(),MenuActionHandler  {
 
@@ -112,10 +113,10 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         viewModel.getPerson(userId,token)
         viewModel.personResponse.observe(viewLifecycleOwner){ response ->
             response?.let {
-                // Obtiene la vista del header del NavigationView
-                val headerView = binding.navigationView.getHeaderView(0)
-                val nameTextView = headerView.findViewById<TextView>(R.id.textView) // Subtitulo
-                val titleTextView = headerView.findViewById<TextView>(R.id.textViewTitle) // Título
+                // Obtener la activity y luego el NavigationView
+                val navigationView = requireActivity().findViewById<NavigationView>(R.id.navigation_view) // ID del NavigationView
+                val nameTextView = navigationView.findViewById<TextView>(R.id.textView) // Subtitulo
+                val titleTextView = navigationView.findViewById<TextView>(R.id.textViewTitle) // Título
 
                 // Asigna los valores recibidos al TextView
                 titleTextView.text = it.personFirstName // Ajusta al nombre real del campo
