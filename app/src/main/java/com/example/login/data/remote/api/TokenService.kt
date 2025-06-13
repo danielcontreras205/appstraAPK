@@ -1,7 +1,7 @@
 package com.example.login.data.remote.api
 
-import com.example.login.data.remote.api.dto.loginDtos.LoginRequest
-import com.example.login.data.remote.api.dto.loginDtos.LoginResponse
+import com.example.login.data.remote.dto.UsuarioDTO.LoginRequest
+import com.example.login.data.remote.dto.UsuarioDTO.LoginResponse
 import com.example.login.data.remote.dto.UsuarioDTO.PersonResponse
 import com.example.login.utils.constants.Usuario
 import retrofit2.Response

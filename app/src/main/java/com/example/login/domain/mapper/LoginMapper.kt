@@ -1,9 +1,9 @@
 package com.example.login.domain.mapper
 
-import com.example.login.data.remote.api.dto.loginDtos.LoginResponse
-import com.example.login.data.remote.api.dto.loginDtos.State
-import com.example.login.data.remote.api.dto.loginDtos.StateType
-import com.example.login.data.remote.api.dto.loginDtos.User
+import com.example.login.data.remote.dto.UsuarioDTO.LoginResponse
+import com.example.login.data.remote.dto.UsuarioDTO.State
+import com.example.login.data.remote.dto.UsuarioDTO.StateType
+import com.example.login.data.remote.dto.UsuarioDTO.User
 import com.example.login.data.remote.dto.UsuarioDTO.City
 import com.example.login.data.remote.dto.UsuarioDTO.Country
 import com.example.login.data.remote.dto.UsuarioDTO.Department
@@ -15,7 +15,6 @@ import com.example.login.domain.model.user.ModelCompany
 import com.example.login.domain.model.user.ModelCountry
 import com.example.login.domain.model.user.ModelDepartment
 import com.example.login.domain.model.user.ModelDocumentType
-import com.example.login.domain.model.user.ModelPerson
 import com.example.login.domain.model.user.ModelProvince
 import com.example.login.domain.model.user.ModelUser
 import com.example.login.domain.model.user.ModelState

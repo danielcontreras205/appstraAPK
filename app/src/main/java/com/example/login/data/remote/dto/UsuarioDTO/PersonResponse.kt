@@ -1,7 +1,5 @@
 package com.example.login.data.remote.dto.UsuarioDTO
 
-import com.example.login.data.remote.api.dto.loginDtos.User
-
 data class PersonResponse(
     val personId: Int,
     val personFirstName: String,

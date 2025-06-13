@@ -1,4 +1,4 @@
-package com.example.login.data.remote.api.dto.loginDtos
+package com.example.login.data.remote.dto.UsuarioDTO
 
 class LoginResponse(
     val token: String,
