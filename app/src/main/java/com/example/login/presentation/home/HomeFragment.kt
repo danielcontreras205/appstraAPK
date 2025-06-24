@@ -49,6 +49,7 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         val token = sessionManager.getToken()
         val user = sessionManager.getUser()
         val companyList = sessionManager.getCompanyList()
+        val company = sessionManager.getSelectedCompany()
 
         binding.textViewToken.text = "Token: $token"
         binding.textViewUser.text = "Usuario: ${user?.userUser ?: "Sin nombre"}" // Asegúrate que user no sea null
@@ -59,6 +60,7 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         } else {
             "No hay empresas"
         }
+        binding.textViewCompanie.text = "Compañia: ${company?.companyId ?: "Sin compañia"}"
         // carga informacion del usuario
         user?.let {getPersona(user.userId,"Bearer " + token.toString())}
         // Configurar botones de UI

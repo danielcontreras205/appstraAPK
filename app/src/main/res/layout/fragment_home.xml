@@ -82,6 +82,14 @@
                 android:text="@string/TXTempresas"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
+            <TextView
+                android:id="@+id/textViewCompanie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:text="@string/TXTempresaInicio"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
