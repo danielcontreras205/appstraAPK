@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- bottom_sheet_cerrar_sesion.xml -->
+    <!-- layout_sin_modal.xml -->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,31 +16,26 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:id="@+id/tvMensaje"
-            android:layout_width="match_parent"
+            android:id="@+id/tvSeleccionaOpcion"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Deseas cerrar sesión?"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:paddingBottom="16dp"/>
+            android:text="Selecciona la empresa por la que se quiere ingresar:"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerOpciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btnConfirmarCerrar"
+            android:id="@+id/btnConfirmarEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sí, cerrar sesión" />
+            android:text="Ingresar"
+            android:layout_marginTop="16dp"/>
 
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cancelar"
-            android:backgroundTint="@android:color/darker_gray"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="8dp"/>
     </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

@@ -12,9 +12,9 @@ data class ModelUser(
 
 data class ModelCompany(
     val companyId: Int,
-    val employeeRoleId: Int,
+    val employeeRoleId: Int?,
     val employeeId: Int?,
-    val personId: Int
+    val personId: Int?
 )
 
 data class ModelState(

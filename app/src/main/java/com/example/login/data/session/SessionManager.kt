@@ -13,6 +13,7 @@ class SessionManager(context: Context){
         private const val KEY_TOKEN = "token"
         private const val KEY_USER = "user"
         private const val KEY_COMPANY_LIST = "listCompany"
+        private const val KEY_COMPANY = "company"
         private const val KEY_MESSAGE = "message"
         private const val KEY_AMBIENTE  = "ambiente"
     }
@@ -32,11 +33,12 @@ class SessionManager(context: Context){
     }
 
 
-    fun saveSession(token: String, user: ModelUser, companyList: List<ModelCompany>, message: String) {
+    fun saveSession(token: String, user: ModelUser, companyList: List<ModelCompany>, message: String, company: ModelCompany?) {
         editor.putString(KEY_TOKEN, token)
         editor.putString(KEY_USER, gson.toJson(user))
         editor.putString(KEY_COMPANY_LIST, gson.toJson(companyList))
         editor.putString(KEY_MESSAGE, message)
+        editor.putString(KEY_COMPANY, gson.toJson(company))
         editor.apply()
     }
 
@@ -59,5 +61,16 @@ class SessionManager(context: Context){
         editor.clear()
         editor.apply()
     }
+
+    fun setSelectedCompany(company: ModelCompany) {
+        val json = gson.toJson(company)
+        sharedPreferences.edit().putString(KEY_COMPANY, json).apply()
+    }
+
+    fun getSelectedCompany(): ModelCompany? {
+        val json = sharedPreferences.getString(KEY_COMPANY, null)
+        return json?.let { gson.fromJson(it, ModelCompany::class.java) }
+    }
+
 
 }

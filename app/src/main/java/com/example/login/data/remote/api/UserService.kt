@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 
-interface TokenService {
+interface UserService {
     @POST(Usuario.urlToken)
     suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
     @GET(Usuario.getPersona)
