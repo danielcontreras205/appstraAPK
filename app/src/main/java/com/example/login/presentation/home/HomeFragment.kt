@@ -77,7 +77,7 @@ class HomeFragment : BaseFragmentConMenu()  {
         viewModel.personResponse.observe(viewLifecycleOwner){ response ->
             response?.let {
                 // Obtener la activity y luego el NavigationView
-                val navigationView = requireActivity().findViewById<NavigationView>(R.id.navigation_view) // ID del NavigationView
+                val navigationView = requireActivity().findViewById<NavigationView>(R.id.nav_view) // ID del NavigationView
                 val nameTextView = navigationView.findViewById<TextView>(R.id.textView) // Subtitulo
                 val titleTextView = navigationView.findViewById<TextView>(R.id.textViewTitle) // Título
 

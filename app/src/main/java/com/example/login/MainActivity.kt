@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState) // Llama al método onCreate de la clase padre para iniciar el ciclo de vida del Activity
-        setContentView(R.layout.drawer_layout_menu) // Asocia este Activity con el layout XML 'activity_main'
+        setContentView(R.layout.activity_main) // Asocia este Activity con el layout XML 'activity_main'
 
         // Inicializa el Toolbar y lo configura como ActionBar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         // Referencia al DrawerLayout y NavigationView definidos en el XML
         drawerLayout = findViewById(R.id.drawer_layout) // Layout que contiene el menú lateral (drawer)
-        navigationView = findViewById(R.id.navigation_view) // Vista que contiene las opciones del menú lateral
+        navigationView = findViewById(R.id.nav_view)// Vista que contiene las opciones del menú lateral
 
         // Crea un toggle (ícono de hamburguesa) para manejar la apertura/cierre del Drawer
         toggle = ActionBarDrawerToggle(
