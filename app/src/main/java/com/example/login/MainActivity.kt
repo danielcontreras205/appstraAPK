@@ -3,6 +3,7 @@ package com.example.login
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -24,23 +25,39 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        super.onCreate(savedInstanceState) // Llama al método onCreate de la clase padre para iniciar el ciclo de vida del Activity
+        setContentView(R.layout.activity_main) // Asocia este Activity con el layout XML 'activity_main'
 
+        // Inicializa el Toolbar y lo configura como ActionBar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        // menu amburgesa
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navigationView = findViewById(R.id.navigation_view)
+        setSupportActionBar(toolbar) // Configura el toolbar como la barra de acciones del Activity
 
-        toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_header_title, R.string.nav_header_desc)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
+        // Referencia al DrawerLayout y NavigationView definidos en el XML
+        drawerLayout = findViewById(R.id.drawer_layout) // Layout que contiene el menú lateral (drawer)
+        navigationView = findViewById(R.id.navigation_view) // Vista que contiene las opciones del menú lateral
 
+        // Crea un toggle (ícono de hamburguesa) para manejar la apertura/cierre del Drawer
+        toggle = ActionBarDrawerToggle(
+            this, // Contexto del Activity
+            drawerLayout, // DrawerLayout a controlar
+            toolbar, // Toolbar asociado
+            R.string.nav_header_title, // Descripción de apertura para accesibilidad
+            R.string.nav_header_desc // Descripción de cierre para accesibilidad
+        )
+
+        drawerLayout.addDrawerListener(toggle) // Asocia el toggle al DrawerLayout para que responda al gesto deslizante
+
+        toggle.syncState() // Sincroniza el estado del ícono del toggle con el Drawer (abierto/cerrado)
+
+        // Instancia el SessionManager, que se encarga de manejar la sesión del usuario (guardar token, estado de login, etc.)
         sessionManager = SessionManager(this)
 
+        // Crea un validador de sesión (puede verificar si el usuario está logueado o su sesión es válida)
         val validator: SessionValidator = SessionValidatorImpl()
+
+        // Obtiene el NavHostFragment que contiene los fragments navegables
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        // Extrae el NavController, el cual se usa para controlar la navegación entre fragments
         val navController = navHostFragment.navController
 
         if (validator.isTokenValid(sessionManager.getToken())) {
@@ -70,14 +87,35 @@ class MainActivity : AppCompatActivity() {
 
         // Escucha el cambio de destinos para mostrar/ocultar barra de acción
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            val isLoggedIn = sessionManager.getToken() != null
+
             when (destination.id) {
-                R.id.loginFragment -> supportActionBar?.hide()
+                R.id.loginFragment -> {
+                    // Mostramos ActionBar, pero sin título ni menú
+                    supportActionBar?.hide()
+
+                    // Ocultamos el botón hamburguesa y bloqueamos el drawer
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                    toggle.isDrawerIndicatorEnabled = false
+                    toggle.syncState()
+                }
                 else -> {
                     supportActionBar?.show()
                     supportActionBar?.title = destination.label
+
+                    if (isLoggedIn) {
+                        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                        toggle.isDrawerIndicatorEnabled = true
+                        toggle.syncState()
+                    } else {
+                        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                        toggle.isDrawerIndicatorEnabled = false
+                        toggle.syncState()
+                    }
                 }
             }
         }
+
         // navegacion menu derecho
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
