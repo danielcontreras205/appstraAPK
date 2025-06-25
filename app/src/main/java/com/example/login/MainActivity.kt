@@ -1,6 +1,7 @@
 package com.example.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
 import com.example.login.data.session.SessionManager
+import com.example.login.domain.model.user.ModelCompany
 import com.example.login.presentation.home.MenuActionHandler
 import com.example.metodos.SessionValidator
 import com.example.metodos.SessionValidatorImpl
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState) // Llama al método onCreate de la clase padre para iniciar el ciclo de vida del Activity
-        setContentView(R.layout.activity_main) // Asocia este Activity con el layout XML 'activity_main'
+        setContentView(R.layout.drawer_layout_menu) // Asocia este Activity con el layout XML 'activity_main'
 
         // Inicializa el Toolbar y lo configura como ActionBar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -78,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
             // Navega al fragmento principal (home)
             navController.navigate(R.id.homeFragment)
+            sessionManager.getSelectedCompany()?.let { ocultarNavPersonSiEsNecesario(it) }
         } else {
             Toast.makeText(this, "Sesión Caducada", Toast.LENGTH_SHORT).show()
             sessionManager.clearSession()
@@ -144,6 +147,14 @@ class MainActivity : AppCompatActivity() {
     fun actualizarMenu() {
         invalidateOptionsMenu()
     }
+    //oculta opciones de menu
+    fun ocultarNavPersonSiEsNecesario(company: ModelCompany) {
+        val navView = findViewById<NavigationView>(R.id.nav_view)
+        val navItem = navView.menu.findItem(R.id.nav_person)
+        navItem?.isVisible = company.personId != null
+        //Log.d("MainActivity", "¿nav_person existe? ${navItem != null}")
+    }
+
     // opciones menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

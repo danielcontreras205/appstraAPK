@@ -74,3 +74,20 @@ com.tuapp
 | `domain/model` | Modelos puros de negocio, sin dependencia de red o UI |
 | `presentation/login` | Fragmento y ViewModel de la pantalla de login |
 | `utils/constants` | Constantes globales como rutas o URLs base |
+
+## Estructura Típica de Layout para Apps con DrawerLayout
+
+En una aplicación Android con menú lateral (navigation drawer), es común tener una jerarquía de layouts como esta para manejar de forma organizada el DrawerLayout, el NavigationView, el Toolbar y los Fragments.
+
+```plaintext
+res/layout/
+├── drawer_layout.xml        # Layout raíz que contiene el menú lateral (drawer)
+│
+├── activity_main.xml        # Layout principal que se incluye dentro de drawer_layout
+│   ├── AppBarLayout
+│   │   └── Toolbar          # Barra superior
+│   └── FragmentContainerView (NavHost)  # Donde se cargan los fragments
+│
+├── nav_header.xml           # Cabecera personalizada del NavigationView
+├── bar_menu_left.xml        # Archivo de menú para el NavigationView
+````

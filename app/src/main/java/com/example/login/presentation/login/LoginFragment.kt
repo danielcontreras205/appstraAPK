@@ -114,8 +114,10 @@ class LoginFragment : Fragment() {
         // Configura el botón de confirmación dentro del modal
         view.findViewById<Button>(R.id.btnConfirmarEmpresa)?.setOnClickListener {
             val seleccion = companyList[spinner.selectedItemPosition] // Obtiene la empresa seleccionada
-            sessionManager.setSelectedCompany(seleccion) // Guarda la empresa seleccionada (opcional, si tienes este método)
             sessionManager.setSelectedCompany(seleccion) // Establece la empresa activa en la sesión
+            sessionManager.getSelectedCompany()?.let { company ->
+                (activity as? MainActivity)?.ocultarNavPersonSiEsNecesario(company)
+            }// actializa menu depende de la persona
             dialog.dismiss() // Cierra el modal
             findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // Navega al fragmento principal
             Toast.makeText(requireContext(), "Ingresaste a: ${seleccion.companyId}", Toast.LENGTH_SHORT).show() // Muestra mensaje con la empresa

@@ -38,7 +38,7 @@ data class StateType(
 
 data class Company(
     val companyId: Int,
-    val employeeRoleId: Int,
+    val employeeRoleId: Int?,
     val employeeId: Int?,
-    val personId: Int
+    val personId: Int?
 )
