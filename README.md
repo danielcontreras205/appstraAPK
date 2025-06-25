@@ -75,19 +75,154 @@ com.tuapp
 | `presentation/login` | Fragmento y ViewModel de la pantalla de login |
 | `utils/constants` | Constantes globales como rutas o URLs base |
 
-## Estructura Típica de Layout para Apps con DrawerLayout
+## 🧭 Estructura del directorio `res/` en un proyecto Android
 
-En una aplicación Android con menú lateral (navigation drawer), es común tener una jerarquía de layouts como esta para manejar de forma organizada el DrawerLayout, el NavigationView, el Toolbar y los Fragments.
+El directorio `res/` contiene todos los **recursos no programáticos** de una app Android, como layouts, menús, imágenes, textos, etc.
+
+---
+
+## 📁 `res/`
+
+### 📁 `layout/`
+Contiene los archivos XML que definen la interfaz gráfica de actividades y fragmentos.
+
+- **`drawer_layout.xml`**  
+  Layout raíz que combina:
+  - `Toolbar` (barra superior)
+  - `NavigationView` (menú lateral)
+  - `FragmentContainerView` (contenedor de fragmentos)
+
+- **`activity_main.xml`**  
+  Es el contenido principal dentro de `drawer_layout`, contiene:
+  - `Toolbar`
+  - `FragmentContainerView` (donde se cargan los fragments)
+
+- **`nav_header.xml`**  
+  Diseño personalizado del encabezado del `NavigationView`. Incluye una imagen de perfil, nombre, etc.
+
+- **`fragment_login.xml`**  
+  Interfaz del fragmento de inicio de sesión.
+
+- **`fragment_home.xml`**  
+  Interfaz del fragmento de inicio.
+
+- **`fragment_user.xml`**  
+  Interfaz del fragmento de usuario.
+
+---
+
+### 📁 `navigation/`
+
+Contiene los grafos de navegación usados por Jetpack Navigation Component.
+
+- **`nav_graph.xml`**  
+  Define la navegación entre fragmentos:
+  - `startDestination`: `loginFragment`
+  - Acción: `loginFragment → homeFragment`
+  - `userFragment`: definido pero no accesible directamente desde login
+  - Acción global: `action_global_loginFragment` (reinicia el flujo hacia login)
+
+---
+
+### 📁 `menu/`
+
+Archivos XML para menús de la app.
+
+- **`bar_menu_left.xml`**  
+  Ítems del menú lateral (Navigation Drawer):
+  - `nav_person → userFragment`
+  - `nav_home → homeFragment`
+  - `nav_gallery`
+  - `nav_slideshow`
+
+- **`bar_menu_top.xml`**  
+  Menú superior de opciones (cerrar sesión, ajustes, etc.)
+
+---
+
+### 📁 `mipmap/`
+
+Contiene íconos de la aplicación.
+
+- **`ic_launcher_round.png`**  
+  Ícono usado en el encabezado del menú lateral.
+
+---
+
+### 📁 `values/`
+
+Contiene valores reutilizables en XML.
+
+- **`strings.xml`**  
+  Textos como `menu_user`, `nav_header_title`, etc.
+
+- **`dimens.xml`**  
+  Dimensiones utilizadas, por ejemplo, en `nav_header.xml`.
+
+---
+
+### 📁 `drawable/`
+
+Contiene recursos gráficos y visuales personalizados.
+
+- **`color_menu.xml`**  
+  Fondo personalizado para el encabezado del menú lateral (puede ser color o degradado).
+
+---
+
+## ✅ Resumen
+
+Esta estructura organiza la UI y navegación de una app Android que usa:
+
+- **Navigation Drawer** (menú lateral)
+- **Jetpack Navigation Component** (para gestionar fragments y flujo de pantallas)
+
+El `drawer_layout` actúa como contenedor principal, el `nav_graph.xml` define la lógica de navegación, y los menús controlan las acciones del usuario.
+
+---
+
+¿Quieres que también te dé un ejemplo de cómo se conecta todo esto en el `MainActivity`?
+
 
 ```plaintext
-res/layout/
-├── drawer_layout.xml        # Layout raíz que contiene el menú lateral (drawer)
+res/
+├── layout/
+│   ├── drawer_layout.xml           # Layout raíz que combina Toolbar, NavigationView y FragmentContainerView
+│   │                               # Contiene el menú lateral y el contenido principal
+│   │
+│   ├── activity_main.xml           # Incluido en drawer_layout como contenido principal
+│   │   ├── Toolbar                  # Barra superior de navegación
+│   │   └── FragmentContainerView   # Contenedor para los Fragments gestionados por Navigation Component
+│   │
+│   ├── nav_header.xml              # Cabecera personalizada del NavigationView (imagen y textos)
+│   ├── fragment_login.xml          # UI para LoginFragment
+│   ├── fragment_home.xml           # UI para HomeFragment
+│   ├── fragment_user.xml           # UI para UserFragment
 │
-├── activity_main.xml        # Layout principal que se incluye dentro de drawer_layout
-│   ├── AppBarLayout
-│   │   └── Toolbar          # Barra superior
-│   └── FragmentContainerView (NavHost)  # Donde se cargan los fragments
+├── navigation/
+│   └── nav_graph.xml               # Grafo de navegación
+│       ├── startDestination: loginFragment
+│       ├── loginFragment → homeFragment (action)
+│       ├── userFragment (no se accede directamente desde login, pero está definido)
+│       └── acción global: action_global_loginFragment (reinicia el flujo al loginFragment)
 │
-├── nav_header.xml           # Cabecera personalizada del NavigationView
-├── bar_menu_left.xml        # Archivo de menú para el NavigationView
+├── menu/
+│   ├── bar_menu_left.xml           # Ítems del menú lateral (Navigation Drawer)
+│   │   ├── nav_person → userFragment (id esperable en controlador)
+│   │   ├── nav_home → homeFragment
+│   │   ├── nav_gallery
+│   │   └── nav_slideshow
+│   │
+│   └── bar_menu_top.xml            # Opciones del menú superior (cerrar sesión, ajustes)
+│
+├── mipmap/
+│   └── ic_launcher_round.png       # Icono usado en el encabezado del menú lateral
+│
+├── values/
+│   ├── strings.xml                 # Contiene textos como menu_user, nav_header_title, etc.
+│   └── dimens.xml                  # Dimensiones usadas en nav_header
+│
+└── drawable/
+    └── color_menu.xml             # Fondo personalizado para el header del menú lateral
+
 ````
