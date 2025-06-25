@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 AlertDialog.Builder(this)
                     .setTitle("Advertencia")
                     .setMessage(
-                        "Usted no está contratado ni enlazado a ninguna de nuestras compañías. " +
                         "Es posible que al iniciar sesión no haya seleccionado con qué compañía desea ingresar. " +
                         "Por favor, cierre sesión y vuelva a iniciar seleccionando una compañía. " +
                         "Si el problema persiste, es posible que no esté registrado en ninguna empresa asociada."

@@ -32,7 +32,7 @@ abstract class BaseFragmentConMenu : Fragment(), MenuActionHandler {
             sessionManager.clearSession()
             bottomSheetDialog.dismiss()
             findNavController().navigate(
-                R.id.action_homeFragment_to_LoginFragment,
+                R.id.action_global_loginFragment,
                 null,
                 NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build()
             )
