@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_home -> navController.navigate(R.id.homeFragment)
+                R.id.nav_person -> navController.navigate(R.id.userFragment)
                 R.id.nav_gallery -> Toast.makeText(this, "Configuración", Toast.LENGTH_SHORT).show()
                 /**R.id.nav_logout -> {
                     sessionManager.clearSession()

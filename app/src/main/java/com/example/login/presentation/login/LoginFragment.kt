@@ -78,6 +78,7 @@ class LoginFragment : Fragment() {
             when {
                 companyList.isNullOrEmpty() -> { // Si no hay empresas
                     Toast.makeText(requireContext(), "No se encontraron empresas", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
                 companyList.size == 1 -> { // Si solo hay una empresa
                     sessionManager.setSelectedCompany(companyList[0]) // Establece esa empresa como seleccionada
