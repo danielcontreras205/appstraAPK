@@ -101,7 +101,8 @@ class MainActivity : AppCompatActivity() {
             R.id.action_cerrar_sesion -> {
                 val navHostFragment =
                     supportFragmentManager.findFragmentById(R.id.nav_host_fragment) // tu NavHostFragment
-                val currentFragment = navHostFragment?.childFragmentManager?.fragments?.firstOrNull()
+                val currentFragment = navHostFragment?.childFragmentManager?.fragments
+                    ?.firstOrNull { it.isVisible }
 
                 if (currentFragment is MenuActionHandler) {
                     currentFragment.onCerrarSesionDesdeMenu()

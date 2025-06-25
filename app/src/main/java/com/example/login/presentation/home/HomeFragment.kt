@@ -5,32 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavOptions
-import androidx.navigation.fragment.findNavController
-import com.example.login.MainActivity
 import com.example.login.R
 import com.example.login.data.session.SessionManager
 import com.example.login.databinding.FragmentHomeBinding
-import com.example.login.databinding.ModalCerrarSesionBinding
-import com.example.login.presentation.login.LoginViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.login.utils.constants.BaseFragmentConMenu
 import com.google.android.material.navigation.NavigationView
 
-class HomeFragment : Fragment(),MenuActionHandler  {
+class HomeFragment : BaseFragmentConMenu()  {
 
     private var _binding: FragmentHomeBinding ? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: HomeViewModel
-
-    //menu por interface
-    override fun onCerrarSesionDesdeMenu() {
-        mostrarModalCerrarSesion()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,34 +60,6 @@ class HomeFragment : Fragment(),MenuActionHandler  {
         super.onDestroyView()
         _binding = null
     }
-    private fun mostrarModalCerrarSesion() {
-        /*
-            Recomendación:
-            Usa AlertDialog para mensajes y confirmaciones simples.
-            Usa DialogFragment para layouts personalizados reutilizables.
-            Usa BottomSheetDialog para una experiencia de usuario más moderna tipo "modal deslizable".
-            */
-        val sessionManager = SessionManager(requireContext())
-        val bottomSheetDialog = BottomSheetDialog(requireContext())
-        val modalBinding = ModalCerrarSesionBinding.inflate(layoutInflater)
-
-        modalBinding.btnConfirmarCerrar.setOnClickListener {
-            sessionManager.clearSession()
-            bottomSheetDialog.dismiss()
-            //no permite regresar al home desde login NavOptions.Builder().setPopUpTo(R.id.homeFragment
-            findNavController().navigate(R.id.action_homeFragment_to_LoginFragment,null,NavOptions.Builder().setPopUpTo(R.id.homeFragment, true).build())
-            //carga el menu
-            (activity as? MainActivity)?.actualizarMenu()
-            Toast.makeText(requireContext(), "Sesión cerrada", Toast.LENGTH_SHORT).show()
-        }
-
-        modalBinding.btnCancelar.setOnClickListener {
-            //Cierra el modal si está visible.
-            bottomSheetDialog.dismiss()
-        }
-        bottomSheetDialog.setContentView(modalBinding.root)
-        bottomSheetDialog.show()
-    }
     private fun configurarEventosUI() {
         binding.btnCerrarSesion.setOnClickListener {
             mostrarModalCerrarSesion()
@@ -111,6 +70,8 @@ class HomeFragment : Fragment(),MenuActionHandler  {
             mostrarModalCerrarSesion()
         }
     }
+
+
     private fun getPersona(userId: Int,token: String) {
         viewModel.getPerson(userId,token)
         viewModel.personResponse.observe(viewLifecycleOwner){ response ->
