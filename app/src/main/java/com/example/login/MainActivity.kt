@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -44,6 +45,21 @@ class MainActivity : AppCompatActivity() {
 
         if (validator.isTokenValid(sessionManager.getToken())) {
             Toast.makeText(this, "Token válido", Toast.LENGTH_SHORT).show()
+            if(sessionManager.getSelectedCompany() == null){
+                AlertDialog.Builder(this)
+                    .setTitle("Advertencia")
+                    .setMessage(
+                        "Usted no está contratado ni enlazado a ninguna de nuestras compañías. " +
+                        "Es posible que al iniciar sesión no haya seleccionado con qué compañía desea ingresar. " +
+                        "Por favor, cierre sesión y vuelva a iniciar seleccionando una compañía. " +
+                        "Si el problema persiste, es posible que no esté registrado en ninguna empresa asociada."
+                    )
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss() // Cierra el diálogo al hacer clic en OK
+                    }
+                    .setCancelable(false) // Evita que el usuario lo cierre tocando fuera
+                    .show()
+            }
             // Navega al fragmento principal (home)
             navController.navigate(R.id.homeFragment)
         } else {
