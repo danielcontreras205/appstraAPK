@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/blue_dark"
-            app:titleTextColor="@color/white"
+            android:titleTextColor="@color/white"
             android:theme="?attr/actionBarTheme"/>
 
         <!-- Fragmentos de navegación -->
