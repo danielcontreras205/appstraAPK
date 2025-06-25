@@ -12,37 +12,50 @@ com.tuapp
 ├── 📦 data                      # Acceso a datos: red, repositorio y sesión
 │   ├── 🌐 remote                # Comunicación con servicios externos
 │   │   ├── 🔌 api              # Interfaces de servicios (Retrofit)
-│   │   │   └── TokenService.kt
+│   │   │   └── UserService.kt
 │   │   ├── 📄 dto              # Modelos para la comunicación con la API
-│   │   │   ├── LoginRequest.kt
-│   │   │   └── LoginResponse.kt
+│   │   │   ├── 📁 UsuarioDTO
+│   │   │   │   ├── LoginRequest.kt
+│   │   │   │   ├── LoginResponse.kt
+│   │   │   │   └── PersonResponse.kt
 │   │   └── ⚙️ retrofit         # Configuración del cliente Retrofit
-│   │       └── RetrofitClient.kt
+│   │       └── 📁 login
+│   │           └── RetrofitUsuario.kt
 │   ├── 🗃️ repository            # Implementación de repositorios
 │   │   └── UserRepository.kt
 │   └── 🔐 session              # Gestión de sesión del usuario
-│       ├── SessionManager.kt
+│       └── SessionManager.kt
 │
 ├── 🧠 domain                   # Lógica de negocio, mapeo y modelos puros
 │   ├── 🔄 mapper              # Mapeo entre modelos
 │   │   └── loginMapper.kt
 │   ├── 🧍 model               # Modelos independientes del backend
-│   │   └── User.kt
+│   │   ├── 📁 user 
+│   │   │    └── User.kt
 │   ├── 📥 response            # Modelos de respuesta HTTP
+│   │   ├── PersonaResponse
 │   │   └── TokenResponse
 │   └── 🧩 usecase             # Casos de uso (lógica de negocio)
 │       └── UserCaseToken
 │
 ├── 🖥️ presentation            # Capa de presentación (UI + ViewModels)
+│   ├── 🏠 home	              # Funcionalidad del home
+│   │   ├── HomeFragment.kt
+│   │   ├── HomeViewModel.kt
+│   │   └── MenuActionHandler.kt  # Interfas
 │   ├── 🔐 login               # Funcionalidad de inicio de sesión
 │   │   ├── LoginFragment.kt
 │   │   └── LoginViewModel.kt
+│   ├── 👤 user               # Funcionalidad de inicio de sesión
+│   │   ├── UserFragment.kt
+│   │   └── UserViewModel.kt
 │   └── MainActivity.kt
 │
 ├── 🧰 utils                    # Utilidades y constantes globales
 │   └── constants
+│       ├── BaseFragmentConMenu.kt
 │       ├── GeneralPaths.kt
-│       └── Token.kt
+│       └── Usuario.kt
 
 ````
 
