@@ -1,10 +1,10 @@
 package com.example.login.domain.model.user
 
-data class ModelUser(
+data class EntityUser(
     val userId: Int,
     val userUser: String,
     val roleId: Int,
-    val state: ModelState,
+    val state: EntityState,
     val userCreationDate: String,
     val userEditDate: String,
     val userEditUserID: Int
@@ -17,17 +17,17 @@ data class ModelCompany(
     val personId: Int?
 )
 
-data class ModelState(
+data class EntityState(
     val stateId: Int,
     val stateName: String,
     val stateDescription: String,
     val stateCreationDate: String,
     val stateEditDate: String,
     val stateEditUserID: Int,
-    val stateType: ModelStateType
+    val stateType: EntityStateType
 )
 
-data class ModelStateType(
+data class EntityStateType(
     val stateTypeId: Int,
     val stateTypeName: String,
     val stateTypeDescription: String,
@@ -36,7 +36,7 @@ data class ModelStateType(
     val stateTypeEditUserID: Int
 )
 
-data class ModelPerson(
+data class EntityPerson(
     val personId: Int,
     val personFirstName: String,
     val personLastName: String,
@@ -44,7 +44,7 @@ data class ModelPerson(
     val personMobilePhone: String,
     val personLandlinePhone: String?,
     val personAddress: String,
-    val city: ModelCity,
+    val city: EntityCity,
     val personRH: String?,
     val personBloodType: String,
     val personCreationDate: String,
@@ -54,45 +54,45 @@ data class ModelPerson(
     val personDateIssueIdentification: String?,
     val personEditDate: String,
     val personEditUserID: Int,
-    val user: ModelUser,
-    val documentType: ModelDocumentType,
+    val user: EntityUser,
+    val documentType: EntityDocumentType,
 )
-data class ModelCountry(
+data class EntityCountry(
     val countryId: Int,
     val countryName: String,
     val countryCreationDate: String,
     val countryEditDate: String
 )
 
-data class ModelDepartment(
+data class EntityDepartment(
     val departmentId: Int,
     val departmentName: String,
     val departmentCreationDate: String,
     val departmentEditDate: String,
     val departmentEditUserID: Int,
-    val country: ModelCountry
+    val country: EntityCountry
 )
 
-data class ModelProvince(
+data class EntityProvince(
     val provinceId: Int,
     val provinceName: String,
     val provinceCreationDate: String,
     val provinceEditDate: String,
     val provinceEditUserID: Int,
-    val department: ModelDepartment
+    val department: EntityDepartment
 )
 
-data class ModelCity(
+data class EntityCity(
     val cityId: Int,
     val cityCode: String,
     val cityName: String,
     val cityCreationDate: String,
     val cityEditDate: String,
     val cityEditUserID: Int,
-    val province: ModelProvince
+    val province: EntityProvince
 )
 
-data class ModelDocumentType(
+data class EntityDocumentType(
     val documentTypeId: Int,
     val documentTypeName: String,
     val documentTypeInitial: String,

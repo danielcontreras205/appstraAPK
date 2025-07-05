@@ -1,7 +1,7 @@
 package com.example.login.data.session
 
 import android.content.Context
-import com.example.login.domain.model.user.ModelUser
+import com.example.login.domain.model.user.EntityUser
 import com.example.login.domain.model.user.ModelCompany
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -33,7 +33,7 @@ class SessionManager(context: Context){
     }
 
 
-    fun saveSession(token: String, user: ModelUser, companyList: List<ModelCompany>, message: String, company: ModelCompany?) {
+    fun saveSession(token: String, user: EntityUser, companyList: List<ModelCompany>, message: String, company: ModelCompany?) {
         editor.putString(KEY_TOKEN, token)
         editor.putString(KEY_USER, gson.toJson(user))
         editor.putString(KEY_COMPANY_LIST, gson.toJson(companyList))
@@ -44,9 +44,9 @@ class SessionManager(context: Context){
 
     fun getToken(): String? = sharedPreferences.getString(KEY_TOKEN, null)
 
-    fun getUser(): ModelUser? {
+    fun getUser(): EntityUser? {
         val json = sharedPreferences.getString(KEY_USER, null)
-        return json?.let { gson.fromJson(it, ModelUser::class.java) }
+        return json?.let { gson.fromJson(it, EntityUser::class.java) }
     }
 
     fun getCompanyList(): List<ModelCompany>? {

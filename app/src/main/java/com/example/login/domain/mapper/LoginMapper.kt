@@ -10,15 +10,15 @@ import com.example.login.data.remote.dto.UsuarioDTO.Department
 import com.example.login.data.remote.dto.UsuarioDTO.DocumentType
 import com.example.login.data.remote.dto.UsuarioDTO.PersonResponse
 import com.example.login.data.remote.dto.UsuarioDTO.Province
-import com.example.login.domain.model.user.ModelCity
+import com.example.login.domain.model.user.EntityCity
 import com.example.login.domain.model.user.ModelCompany
-import com.example.login.domain.model.user.ModelCountry
-import com.example.login.domain.model.user.ModelDepartment
-import com.example.login.domain.model.user.ModelDocumentType
-import com.example.login.domain.model.user.ModelProvince
-import com.example.login.domain.model.user.ModelUser
-import com.example.login.domain.model.user.ModelState
-import com.example.login.domain.model.user.ModelStateType
+import com.example.login.domain.model.user.EntityCountry
+import com.example.login.domain.model.user.EntityDepartment
+import com.example.login.domain.model.user.EntityDocumentType
+import com.example.login.domain.model.user.EntityProvince
+import com.example.login.domain.model.user.EntityUser
+import com.example.login.domain.model.user.EntityState
+import com.example.login.domain.model.user.EntityStateType
 import com.example.login.domain.response.PersonaResponse
 import com.example.login.domain.response.TokenResponse
 
@@ -63,8 +63,8 @@ fun PersonResponse.toDomainPersonaResponse(): PersonaResponse {
     )
 }
 
-fun City.toDomainCity(): ModelCity {
-    return ModelCity(
+fun City.toDomainCity(): EntityCity {
+    return EntityCity(
         cityId = this.cityId,
         cityName = this.cityName,
         cityCode = this.cityCode,
@@ -76,8 +76,8 @@ fun City.toDomainCity(): ModelCity {
 }
 
 
-fun Province.toDomainProvince(): ModelProvince {
-    return ModelProvince(
+fun Province.toDomainProvince(): EntityProvince {
+    return EntityProvince(
         provinceId = this.provinceId,
         provinceName = this.provinceName,
         provinceCreationDate = this.provinceCreationDate,
@@ -87,8 +87,8 @@ fun Province.toDomainProvince(): ModelProvince {
     )
 }
 
-fun Department.toDomainDepartment(): ModelDepartment {
-    return ModelDepartment(
+fun Department.toDomainDepartment(): EntityDepartment {
+    return EntityDepartment(
         departmentId = this.departmentId,
         departmentName = this.departmentName,
         departmentCreationDate =this.departmentCreationDate,
@@ -98,8 +98,8 @@ fun Department.toDomainDepartment(): ModelDepartment {
     )
 }
 
-fun Country.toDomainCountry(): ModelCountry {
-    return ModelCountry(
+fun Country.toDomainCountry(): EntityCountry {
+    return EntityCountry(
         countryId = this.countryId,
         countryName = this.countryName,
         countryCreationDate = this.countryEditDate,
@@ -107,8 +107,8 @@ fun Country.toDomainCountry(): ModelCountry {
     )
 }
 
-fun User.toDomainUser(): ModelUser{
-    return ModelUser(
+fun User.toDomainUser(): EntityUser{
+    return EntityUser(
         userId = this.userId,
         userUser = this.userUser,
         roleId = this.roleId,
@@ -118,8 +118,8 @@ fun User.toDomainUser(): ModelUser{
         userCreationDate = this.userCreationDate
     )
 }
-fun State.toDomainState(): ModelState {
-    return ModelState(
+fun State.toDomainState(): EntityState {
+    return EntityState(
         stateId = this.stateId,
         stateName = this.stateName,
         stateDescription = this.stateDescription,
@@ -129,8 +129,8 @@ fun State.toDomainState(): ModelState {
         stateType = this.stateType.toDomainStateType()
     )
 }
-fun StateType.toDomainStateType(): ModelStateType {
-    return ModelStateType(
+fun StateType.toDomainStateType(): EntityStateType {
+    return EntityStateType(
         stateTypeId = this.stateTypeId,
         stateTypeName = this.stateTypeName,
         stateTypeDescription = this.stateTypeDescription,
@@ -139,8 +139,8 @@ fun StateType.toDomainStateType(): ModelStateType {
         stateTypeEditUserID = this.stateTypeEditUserID
     )
 }
-fun DocumentType.toDomainDocumentType(): ModelDocumentType {
-    return ModelDocumentType(
+fun DocumentType.toDomainDocumentType(): EntityDocumentType {
+    return EntityDocumentType(
         documentTypeId = this.documentTypeId,
         documentTypeName = this.documentTypeName,
         documentTypeInitial = this.documentTypeInitial,
