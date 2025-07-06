@@ -2,6 +2,7 @@ package com.example.login.presentation.login
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.login.MainActivity
 import com.example.login.R
+import com.example.login.data.remote.retrofit.company.RetrofitCompany
 import com.example.login.data.remote.retrofit.login.RetrofitUsuario
 import com.example.login.utils.constants.GeneralPaths
 import com.example.login.data.session.SessionManager
 import com.example.login.databinding.FragmentLoginBinding
+import com.example.login.domain.mapper.toEntityCompany
+import com.example.login.domain.model.company.EntityComapany
 import com.example.login.domain.model.user.ModelCompany
+import com.example.login.domain.response.CompaniaResponse
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class LoginFragment : Fragment() {
@@ -42,7 +47,10 @@ class LoginFragment : Fragment() {
         // Se coloca el ambiente en el cual va a trabajar
         val sessionManager = SessionManager(requireContext())
         sessionManager.setAmbiente(GeneralPaths.PRODUCCION)
-        sessionManager.getAmbiente()?.let { RetrofitUsuario.init(it) }
+        sessionManager.getAmbiente()?.let { baseUrl ->
+            RetrofitUsuario.init(baseUrl)
+            RetrofitCompany.init(baseUrl)
+        }
 
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
@@ -87,7 +95,7 @@ class LoginFragment : Fragment() {
                 }
                 else -> {
                     // Si hay más de una empresa, muestra el selector para elegir una
-                    mostrarSeleccionEmpresa(companyList, sessionManager)
+                    mostrarSeleccionEmpresa(sessionManager)
                 }
             }
         } else {
@@ -97,40 +105,43 @@ class LoginFragment : Fragment() {
     }
 
     @SuppressLint("MissingInflatedId")
-// Muestra un modal (BottomSheet) para que el usuario seleccione una empresa
-    private fun mostrarSeleccionEmpresa(companyList: List<ModelCompany>, sessionManager: SessionManager) {
-        val dialog = BottomSheetDialog(requireContext()) // Crea un diálogo tipo BottomSheet
-        val view = layoutInflater.inflate(R.layout.modal_seleccionar_empresa, null) // Infla el layout personalizado del modal
+    // Muestra un modal (BottomSheet) para que el usuario seleccione una empresa
+    private fun mostrarSeleccionEmpresa(sessionManager: SessionManager) {
+        //llama la funcion para buscar las compañias
+        viewModel.getCompanyName(sessionManager.getCompanyList(),"Bearer " + sessionManager.getToken())
+        viewModel.companyInfoList.observe(viewLifecycleOwner) { list ->
+            var companias: List<CompaniaResponse>? = list
+            val dialog = BottomSheetDialog(requireContext()) // Crea un diálogo tipo BottomSheet
+            val view = layoutInflater.inflate(R.layout.modal_seleccionar_empresa, null) // Infla el layout personalizado del modal
 
-        val spinner: Spinner = view.findViewById(R.id.spinnerOpciones) // Obtiene el spinner del layout
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item, // Usa un layout simple de Android para los ítems
-            companyList.map { it.companyId } // Extrae los IDs de empresa para mostrar en el spinner
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Define el layout para el desplegable
-        spinner.adapter = adapter // Asocia el adapter al spinner
+            val spinner: Spinner = view.findViewById(R.id.spinnerOpciones) // Obtiene el spinner del layout
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, // Usa un layout simple de Android para los ítems
+                companias!!.map { it.companyName } // Extrae los IDs de empresa para mostrar en el spinner
+            )
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) // Define el layout para el desplegable
+            spinner.adapter = adapter // Asocia el adapter al spinner
 
-        // Configura el botón de confirmación dentro del modal
-        view.findViewById<Button>(R.id.btnConfirmarEmpresa)?.setOnClickListener {
-            val seleccion = companyList[spinner.selectedItemPosition] // Obtiene la empresa seleccionada
-            sessionManager.setSelectedCompany(seleccion) // Establece la empresa activa en la sesión
-            sessionManager.getSelectedCompany()?.let { company ->
-                (activity as? MainActivity)?.ocultarNavPersonSiEsNecesario(company)
-            }// actializa menu depende de la persona
-            dialog.dismiss() // Cierra el modal
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // Navega al fragmento principal
-            Toast.makeText(requireContext(), "Ingresaste a: ${seleccion.companyId}", Toast.LENGTH_SHORT).show() // Muestra mensaje con la empresa
+            // Configura el botón de confirmación dentro del modal
+            view.findViewById<Button>(R.id.btnConfirmarEmpresa)?.setOnClickListener {
+
+                val seleccion = companias[spinner.selectedItemPosition] // Obtiene la empresa seleccionada
+                sessionManager.getCompanyListById(seleccion.companyId)
+                    ?.let { it1 -> sessionManager.setSelectedCompany(it1) } // Establece la empresa activa en la sesión
+                sessionManager.getSelectedCompany()?.let { company ->
+                    (activity as? MainActivity)?.ocultarNavPersonSiEsNecesario(company)
+                }// actializa menu depende de la persona
+                dialog.dismiss() // Cierra el modal
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment) // Navega al fragmento principal
+                Toast.makeText(requireContext(), "Ingresaste a: ${seleccion.companyId}", Toast.LENGTH_SHORT).show() // Muestra mensaje con la empresa
+            }
+
+            dialog.setContentView(view) // Establece la vista personalizada al diálogo
+            dialog.setCancelable(false) // No permite cancelar el modal tocando fuera de él
+            dialog.show() // Muestra el diálogo en pantalla
         }
-
-        dialog.setContentView(view) // Establece la vista personalizada al diálogo
-        dialog.setCancelable(false) // No permite cancelar el modal tocando fuera de él
-        dialog.show() // Muestra el diálogo en pantalla
     }
-
-
-
-
 }
 
 

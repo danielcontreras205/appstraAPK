@@ -55,6 +55,10 @@ class SessionManager(context: Context){
         return json?.let { gson.fromJson(it, type) }
     }
 
+    fun getCompanyListById(companyId: Int): ModelCompany? {
+        return getCompanyList()?.firstOrNull { it.companyId == companyId }
+    }
+
     fun getMessage(): String? = sharedPreferences.getString(KEY_MESSAGE, null)
 
     fun clearSession() {
